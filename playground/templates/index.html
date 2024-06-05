@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Index</title>
+  <style>
+    /* Your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #F6F6DB;
+    }
+
+    .medicine-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      list-style: none;
+      padding: 0;
+    }
+
+    .medicine-item {
+      width: 30%;
+      margin: 10px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .medicine-item a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .medicine-item:hover {
+      background-color: lightblue;
+    }
+
+    .medicine-image {
+      width: 50%;
+      height: 150px;
+    }
+
+    .medicine-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .search-box {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      color: blueviolet;
+      
+    }
+
+    .search-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .des:hover {
+      cursor: pointer;
+      color: indianred;
+      text-decoration: underline;
+    }
+
+    .description {
+      margin-top: 10px;
+      
+    }
+    .display_none{
+
+      display: none;
+    }
+
+    .description.show {
+      display: block;
+      color: green;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
+    nav {
+      margin-top: 20px;
+      /* Add some space below the heading */
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin-right: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+     
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <h1>Medicine List</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+
+        <li><a href="#">Products</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <form action="" method="post">
+    <div class="search-box">
+      {% csrf_token %}
+      {{ form.search_text }}
+      <button class="btn">Search</button>
+    </div>
+  </form>
+  
+  <ul class="medicine-list">
+
+    {% for medicine in medicines %}
+<li class="medicine-item">
+    <div>
+        {% if medicine.image %}
+        <!-- Check if the medicine has an associated image -->
+        <!-- Update the src attribute to point to the correct image file in your static directory -->
+        <img src="{% static 'images/' %}{{ medicine.image }}" alt="{{ medicine.medicine_name }}" class="medicine-image">
+        {% else %}
+        <!-- If the medicine doesn't have an associated image, you can display a placeholder or fallback image -->
+        <img src="{% static 'images/placeholder.jpg' %}" alt="Placeholder Image" class="medicine-image">
+        {% endif %}
+        <h3 class="medicine-name">{{ medicine.medicine_name }}</h3>
+        <p>Generic Name:{{medicine.generic_name}}</p>
+        <p>Manufacturer: {{medicine.manufacture}}</p>
+        <p>Price: {{medicine.price}}tk</p>
+        <p>Batch Number: {{medicine.batch_number}}</p>
+        <p class="des" onclick="showDescription(this, '{{ medicine.id }}')">Click here for Medicine description</p>
+        <div class="description display_none" id="description-medicine-{{ medicine.id }}">{{ medicine.description }}</div>
+    </div>
+</li>
+{% endfor %}
+  </ul>
+
+  <script>
+    function showDescription(element, id) {
+      var description = document.getElementById("description-medicine-"+id);
+      description.classList.toggle('display_none');
+    }
+  </script>
+</body>
+
+</html>
