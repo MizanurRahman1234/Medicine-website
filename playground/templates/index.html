@@ -136,8 +136,8 @@
     <nav>
       <ul>
         <li><a href="#">Home</a></li>
-
         <li><a href="#">Products</a></li>
+        <li><a href="admin/">Admin</a></li>
 
       </ul>
     </nav>
@@ -159,7 +159,7 @@
         {% if medicine.image %}
         <!-- Check if the medicine has an associated image -->
         <!-- Update the src attribute to point to the correct image file in your static directory -->
-        <img src="{% static 'images/' %}{{ medicine.image }}" alt="{{ medicine.medicine_name }}" class="medicine-image">
+        <img src="{{ medicine.image.url }}" alt="{{ medicine.medicine_name }}" class="medicine-image">
         {% else %}
         <!-- If the medicine doesn't have an associated image, you can display a placeholder or fallback image -->
         <img src="{% static 'images/placeholder.jpg' %}" alt="Placeholder Image" class="medicine-image">
