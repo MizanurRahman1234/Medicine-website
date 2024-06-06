@@ -3,7 +3,7 @@
  Welcome to the Medicine Information Web App! This Django-based application allows users to browse through a comprehensive list of medicines and view detailed information about each one. Additionally, it includes an admin panel where administrators can manage the medicine database efficiently. 
 
 ## Features
--**Browse Medicines:** Easily search and browse through a wide range of medicines.
+-**Browse Medicines: ** Easily search and browse through a wide range of medicines.
  - **Detailed Information: ** View detailed information for each medicine, including generic name, manufacturer, and description.
  - **Admin Panel: ** Manage the medicine database with ease using the built-in admin panel.
 
@@ -19,9 +19,7 @@ These instructions will help you set up the project on your local machine for de
 
 ### Prerequisites
 -python latest version (Install python from the website)
--Django (```bash 
-pip install django `
-``)
+-Django (``pip install django `` run this command in comand prompt)
 -pip ( package installer)
 
 ### Installation
